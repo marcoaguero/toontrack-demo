@@ -1,0 +1,341 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- Option 1: Include in HTML -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link
+      id="favicon"
+      rel="shortcut icon"
+      href="assets/logo.png"
+      type="image/png"
+    />
+
+    <title>Embedded Checkout Demo</title>
+    <link rel="stylesheet" href="main.css" />
+    <script
+      id="fsc-api"
+      src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.8.3/fastspring-builder.min.js"
+      type="text/javascript"
+      data-storefront="assignmentse.test.onfastspring.com/embedded-demo-js"
+      data-data-callback="callbackFunction"
+      data-continuous="true"
+      data-before-requests-callback="beforeRequestsCallbackFunction"
+      data-after-markup-callback="afterMarkupCallbackFunction"
+    ></script>
+  </head>
+  <body>
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/embedded-javascript">
+          <img src="assets/logo.png" alt="Logo" height="50" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/embedded-javascript"
+                >Store</a
+              >
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/embedded-javascript/account-page.html"
+                >Account</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-dark" aria-current="page" onclick="buyNow()"
+                ><i class="bi-cart-fill me-1"></i
+                ><span id="cart-quantity">0</span> items
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <button
+      type="button"
+      class="btn btn-primary position-absolute end-0 top-50 m-1"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Show Info
+    </button>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Info</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-row justify-content-center align-items-center">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                  onchange="togglePopoverDisplay()"
+                />
+                display helpers
+              </div>
+              <br />
+              <p>Credit Card: 4242 4242 4242 4242</p>
+              <p>CVV: *N9FD</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column min-vh-100">
+      <div class="container px-4 px-lg-5 mt-5 flex-grow-1">
+        <header class="text-center my-4">
+          <h1>Store</h1>
+
+          <div
+            class="d-flex mt-2 justify-content-center position-relative col col-md-6 m-auto"
+          >
+            <i
+              class="bi bi-info-circle position-absolute popover-display start-0"
+              data-bs-toggle="popover"
+              data-bs-placement="left"
+              data-bs-title="Reset cart"
+              data-bs-content="<a href='https://developer.fastspring.com/reference/methods#reset-the-cart' target='_blank'>fastspring.builder.reset()</a>"
+              data-bs-html="true"
+              role="button"
+            ></i>
+            <button class="btn btn-dark me-2" onclick="resetCart()">
+              Reset cart
+            </button>
+            <div class="dropdown">
+              <button
+                class="btn btn-light dropdown-toggle"
+                type="button"
+                id="countryDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Select Country
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="countryDropdown">
+                <li>
+                  <a
+                    class="dropdown-item btn"
+                    onclick="selectCountry('🇳🇱 Netherlands')"
+                    >🇳🇱 Netherlands</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item btn" onclick="selectCountry('🇺🇸 USA')"
+                    >🇺🇸 USA</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item btn"
+                    onclick="selectCountry('🇯🇵 Japan')"
+                    >🇯🇵 Japan</a
+                  >
+                </li>
+                <!-- Add more countries as needed -->
+              </ul>
+            </div>
+            <i
+              class="bi bi-info-circle position-absolute popover-display end-0"
+              data-bs-toggle="popover"
+              data-bs-placement="right"
+              data-bs-title="Select country"
+              data-bs-content="<a href='https://developer.fastspring.com/reference/methods#country' target='_blank'>fastspring.builder.country()</a>"
+              data-bs-html="true"
+              role="button"
+            ></i>
+          </div>
+        </header>
+
+        <div class="row justify-content-center my-4">
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                class="productImage"
+                data-fsc-item-path="demo-product-3"
+                data-fsc-item-image
+              />
+              <div class="card-body p-4 text-center position-relative">
+                <i
+                  class="bi bi-info-circle position-absolute popover-display top-50"
+                  data-bs-toggle="popover"
+                  data-bs-placement="left"
+                  data-bs-title="Add to cart"
+                  data-bs-content="<a href='https://developer.fastspring.com/reference/methods#push' target='_blank'>fastspring.builder.push()</a>"
+                  data-bs-html="true"
+                  role="button"
+                ></i>
+                <h5
+                  data-fsc-item-path="demo-product-3"
+                  data-fsc-item-display
+                  class="card-title"
+                ></h5>
+                <span
+                  data-fsc-item-path="demo-product-3"
+                  data-fsc-item-price
+                  class="d-block text-center"
+                ></span>
+                <a
+                  class="btn btn-success mt-2 cartButton"
+                  onclick="addItem('demo-product-3')"
+                  >Add to cart</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                class="productImage"
+                data-fsc-item-path="demo-product-4"
+                data-fsc-item-image
+              />
+              <div class="card-body p-4 text-center position-relative">
+                <i
+                  class="bi bi-info-circle position-absolute popover-display"
+                  data-bs-toggle="popover"
+                  data-bs-placement="top"
+                  data-bs-title="Directives"
+                  data-bs-content="<a href='https://developer.fastspring.com/reference/directives' target='_blank'>data-fsc-item-path, data-fsc-item-display and data-fsc-item-price</a>"
+                  data-bs-html="true"
+                  role="button"
+                ></i>
+                <h5
+                  data-fsc-item-path="demo-product-4"
+                  data-fsc-item-display
+                  class="card-title"
+                ></h5>
+                <span
+                  data-fsc-item-path="demo-product-4"
+                  data-fsc-item-price
+                  class="d-block text-center"
+                ></span>
+                <a
+                  class="btn btn-success mt-2 cartButton"
+                  onclick="addItem('demo-product-4')"
+                  >Add to cart</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Shopping Cart Section -->
+        <div id="cartSection" class="row justify-content-center my-4">
+          <div class="col-md-8">
+            <div class="card position-relative">
+              <ul
+                id="cartItems"
+                class="list-group list-group-flush bg-transparent"
+              ></ul>
+              <i
+                class="bi bi-info-circle position-absolute popover-display end-0"
+                data-bs-toggle="popover"
+                data-bs-placement="right"
+                data-bs-title="🗑️ Remove and Update"
+                data-bs-content="<a href='https://developer.fastspring.com/reference/methods#remove-a-product' target='_blank'>fastspring.builder.remove()</a> and <a href='https://developer.fastspring.com/reference/methods#update-product-quantity' target='_blank'>fastspring.builder.update()"
+                data-bs-html="true"
+                role="button"
+              ></i>
+              <div class="card-footer">
+                <p class="mb-0 text-end">
+                  <a
+                    class="btn btn-dark"
+                    aria-current="page"
+                    onclick="buyNow()"
+                  >
+                    <i class="bi-cart-fill me-1"></i>Checkout
+                    <span
+                      class="ms-1"
+                      id="order-total"
+                      data-fsc-order-total
+                    ></span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="py-3 bg-light border-top">
+        <div class="container text-center">
+          <span class="text-muted">FastSpring &copy; 2023</span>
+        </div>
+      </footer>
+    </div>
+    <div id="fastspring_spinner">
+      <img src="https://d1f8f9xcsvx3ha.cloudfront.net/pinhole/spin.svg" />
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="main.js"></script>
+    <script>
+      const popoverTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="popover"]'
+      );
+      const popoverList = [...popoverTriggerList].map(
+        (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+      );
+      // $("[data-toggle=popover]").popover({ html: true });
+    </script>
+  </body>
+</html>
