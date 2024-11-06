@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,32 +14,31 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
-    <link
-      id="favicon"
-      rel="shortcut icon"
-      href="assets/logo.png"
-      type="image/png"
-    />
+
+    <title>Toontrack Demo</title>
     <link rel="stylesheet" href="main.css" />
     <script
       id="fsc-api"
-      src="https://sbl.onfastspring.com/sbl/0.9.5/fastspring-builder.min.js"
+      src="https://sbl.onfastspring.com/sbl/1.0.1/fastspring-builder.min.js"
       type="text/javascript"
-      data-storefront="assignmentse.test.onfastspring.com/embedded-demo-js"
+      data-storefront="assignmentse.test.onfastspring.com/embedded-toontrack-embedded-demo"
       data-data-callback="callbackFunction"
       data-continuous="true"
       data-before-requests-callback="beforeRequestsCallbackFunction"
       data-after-markup-callback="afterMarkupCallbackFunction"
-      data-popup-webhook-received="dataPopupWebhookReceived"
+      data-access-key="D8RVBIZ3SFMXNC5Z5VV1HQ"
     ></script>
   </head>
-
   <body>
     <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/embedded-javascript">
-          <img src="assets/logo.png" alt="Logo" height="50" />
+        <a class="navbar-brand" href="/embedded-toontrack">
+          <img
+            src="assets/toontrack-logo.png"
+            alt="Logo"
+            style="height: 50px; width: auto"
+          />
         </a>
         <button
           class="navbar-toggler"
@@ -55,42 +52,92 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <!-- Align Menu to the Left -->
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="/embedded-javascript"
-                >Store</a
-              >
+              <a class="nav-link" href="#">PRODUCTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">SUPPORT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">NEWS</a>
             </li>
           </ul>
+          <!-- Keep Cart on the Right -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/embedded-javascript/account-page.html"
-                >Account</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-dark" aria-current="page" onclick="buyNow()"
+              <a class="btn btn-light" href="/embedded-toontrack/checkout.html"
                 ><i class="bi-cart-fill me-1"></i
-                ><span id="cart-quantity">0</span> items
-              </a>
+                ><span id="cart-quantity">0</span> items</a
+              >
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="d-flex justify-content-end px-4 py-3">
+      <div class="dropdown">
+        <button
+          class="btn btn-light dropdown-toggle"
+          type="button"
+          id="countryDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Select Country
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="countryDropdown">
+          <li>
+            <a class="dropdown-item btn" onclick="selectCountry('🇨🇦 Canada')"
+              >🇨🇦 Canada</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item btn" onclick="selectCountry('🇯🇵 Japan')"
+              >🇯🇵 Japan</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item btn"
+              onclick="selectCountry('🇳🇱 Netherlands')"
+              >🇳🇱 Netherlands</a
+            >
+          </li>
+
+          <li>
+            <a class="dropdown-item btn" onclick="selectCountry('🇸🇪 Sweden')"
+              >🇸🇪 Sweden</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item btn"
+              onclick="selectCountry('🇬🇧 United Kingdom')"
+              >🇬🇧 United Kingdom</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item btn" onclick="selectCountry('🇺🇸 USA')"
+              >🇺🇸 USA</a
+            >
+          </li>
+
+          <!-- Add more countries as needed -->
+        </ul>
+      </div>
+    </div>
     <div class="d-flex flex-column min-vh-100">
       <div class="container px-4 px-lg-5 mt-5 flex-grow-1">
-        <header class="text-center my-4">
+        <!-- <header class="text-center my-4">
           <h1>Checkout</h1>
           <div class="mt-2">
-            <a class="btn btn-dark" href="/embedded-javascript/index.html"
+            <a class="btn btn-dark" href="/embedded-toontrack/index.html"
               >Go back</a
             >
           </div>
-        </header>
+        </header> -->
         <div class="d-md-flex d-row">
           <div class="col-md-6 col px-md-1 px-0">
             <div class="mb-0 text-center">
@@ -138,7 +185,7 @@
       </div>
       <footer class="py-3 bg-light border-top">
         <div class="container text-center">
-          <span class="text-muted">FastSpring &copy; 2023</span>
+          <span class="text-muted">Toontrack &copy; 2024</span>
         </div>
       </footer>
     </div>

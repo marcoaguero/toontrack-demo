@@ -123,11 +123,11 @@ couponForm.addEventListener("submit", function (e) {
 
 function buyNow() {
   var orderSession = {
-    paymentContact: {
-      email: "maguero@fastspring.com",
-      firstName: "marco",
-      lastName: "aguero",
-    },
+    // paymentContact: {
+    //   email: "maguero@fastspring.com",
+    //   firstName: "marco",
+    //   lastName: "aguero",
+    // },
     language: "en",
   };
 
@@ -177,6 +177,15 @@ function callbackFunction(data) {
       var cartItem = document.createElement("li");
       cartItem.className =
         "list-group-item d-flex justify-content-between align-items-center";
+      // Image thumbnail on the left
+      var itemImage = document.createElement("img");
+      itemImage.src = item.image; // Set the image source from the item object
+      itemImage.alt = item.display; // Alt text for accessibility
+      itemImage.className = "me-2"; // Bootstrap class for styling
+      itemImage.style.width = "50px"; // Set width of thumbnail
+      itemImage.style.height = "auto"; // Keep aspect ratio
+
+      cartItem.appendChild(itemImage);
 
       // Item name on the left
       var itemName = document.createElement("span");
@@ -187,7 +196,7 @@ function callbackFunction(data) {
       // Item price on the middle
       var itemPrice = document.createElement("span");
       itemPrice.textContent = item.price; // Fixed the typo here
-      itemPrice.className = "col-3 col-md-4 text-end";
+      itemPrice.className = "col-3 text-start";
       cartItem.appendChild(itemPrice);
 
       // Create a menu for "Remove" button and quantity dropdown
@@ -263,6 +272,9 @@ function getCountryCodeForCountry(country) {
   const countryCodes = {
     "🇳🇱 Netherlands": "NL",
     "🇺🇸 USA": "US",
+    "🇸🇪 Sweden": "SE",
+    "🇬🇧 United Kingdom": "GB",
+    "🇨🇦 Canada": "CA",
     "🇯🇵 Japan": "JP",
     // Add more mappings as needed
   };
